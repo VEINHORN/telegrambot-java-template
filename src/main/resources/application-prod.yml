@@ -1,3 +1,15 @@
+# Production profile
+#
+# Datasource is configured for Neon (https://neon.tech) — a serverless PostgreSQL provider.
+# Hikari connection pool is tuned for Neon's connection model:
+#   - minimum-idle: 0      — release connections when idle to avoid Neon's idle connection charges
+#   - maximum-pool-size: 1 — keep the pool small; Neon bills per compute unit
+#   - max-lifetime: 300000 — 5 min; rotate connections before Neon's server-side timeout kicks in
+#   - idle-timeout: 60000  — 1 min; drop idle connections quickly
+#   - keepaliveTime: 0     — disable keepalive pings (not needed with short idle-timeout)
+#
+# Set the connection string via the SPRING_DATASOURCE_URL environment variable, e.g.:
+#   jdbc:postgresql://<host>.neon.tech/<dbname>?sslmode=require
 spring:
   datasource:
     hikari:
