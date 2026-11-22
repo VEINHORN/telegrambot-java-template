@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    hikari:
+      minimum-idle: 0
+      maximum-pool-size: 1
+      max-lifetime: 300000
+      idle-timeout: 60000
+      keepaliveTime: 0
